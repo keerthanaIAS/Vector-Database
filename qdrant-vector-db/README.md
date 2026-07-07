@@ -1,3 +1,11 @@
+# env
+
+QDRANT_URL=http://localhost:6333 *after docker up*
+
+COLLECTION_NAME=products
+
+VECTOR_SIZE=3 *points count*
+
 # Qdrant Vector Database - Production-Style Project
 
 A complete learning project for Qdrant, a dedicated vector database. This project demonstrates vector search, metadata filtering, and performance testing.
