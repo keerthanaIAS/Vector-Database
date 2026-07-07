@@ -1,0 +1,24 @@
+{
+  "name": "qdrant-vector-db",
+  "version": "1.0.0",
+  "description": "Qdrant Vector Database Demo",
+  "main": "index.js",
+  "scripts": {
+    "create": "node scripts/createCollection.js",
+    "insert": "node scripts/insertVectors.js",
+    "retrieve": "node scripts/retrieve.js",
+    "search": "node scripts/search.js",
+    "filter": "node scripts/filteredSearch.js",
+    "update": "node scripts/updateVector.js",
+    "upsert": "node scripts/upsert.js",
+    "delete": "node scripts/deleteVector.js",
+    "collections": "node scripts/listCollections.js",
+    "info": "node scripts/collectionInfo.js",
+    "drop": "node scripts/dropCollection.js",
+    "performance": "node scripts/performanceTest.js"
+  },
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.18.0",
+    "dotenv": "^17.4.2"
+  }
+}
