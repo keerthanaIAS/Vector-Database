@@ -1,0 +1,32 @@
+✅ What is an S3 bucket? 
+→ An S3 bucket is a secure container used to store files (objects) in AWS.
+✅ What is an object? 
+→ An object is a file (such as an image, video, or PDF) stored inside an S3 bucket.
+✅ What is an object key? 
+→ An object key is the unique filename/path that identifies an object within an S3 bucket.
+✅ Why use a UUID in the key? 
+→ A UUID ensures every uploaded file has a unique key, preventing filename collisions and overwrites.
+✅ Why are buckets private by default? 
+→ Buckets are private by default to protect data from unauthorized public access.
+✅ What problem does a pre-signed URL solve? 
+→ A pre-signed URL provides temporary, secure access to a private S3 object without making the bucket public.
+✅ Why does a pre-signed URL expire? 
+→ It expires to limit access time and improve security by preventing permanent public access.
+✅ Why store images in S3 instead of a database? 
+→ S3 is optimized for scalable, durable, and cost-effective file storage, while databases are optimized for structured data.
+✅ Why does a vector database like Qdrant store vectors instead of image files? 
+→ Qdrant stores numerical embeddings because vector similarity search works on vectors, not binary image files.
+✅ Why can't Qdrant search raw images? 
+→ Qdrant cannot understand image pixels directly and requires embeddings that represent image features numerically.
+✅ What is an embedding? 
+→ An embedding is a fixed-length numerical vector that captures the semantic meaning of data.
+✅ Why do similar images have similar vectors? 
+→ The embedding model places visually or semantically similar images close together in vector space.
+✅ Why must the same embedding model be used for indexing and searching? 
+→ The same model ensures stored and query embeddings exist in the same vector space for accurate similarity comparison.
+✅ Why doesn't Qdrant generate embeddings itself? 
+→ Qdrant is a vector storage and search engine, not an AI model that understands images or text.
+✅ Why are embeddings fixed-length vectors (e.g., 512, 768, 1024 dimensions)? 
+→ Fixed-length vectors allow efficient indexing, storage, and mathematical similarity calculations.
+✅ What is stored in S3 versus what is stored in Qdrant? 
+→ S3 stores the original image files, while Qdrant stores their embeddings and related metadata (payload).
