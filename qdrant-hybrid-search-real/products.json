@@ -1,0 +1,58 @@
+[
+  {
+    "id": "1",
+    "name": "Nike Air Zoom",
+    "description": "Professional running shoes with Zoom Air cushioning technology",
+    "category": "Running Shoes",
+    "price": 129.99
+  },
+  {
+    "id": "2",
+    "name": "Nike Running Shoes",
+    "description": "Comfortable running shoes for daily training and jogging",
+    "category": "Running Shoes",
+    "price": 89.99
+  },
+  {
+    "id": "3",
+    "name": "Adidas Ultraboost",
+    "description": "Premium running shoes with Boost technology for energy return",
+    "category": "Running Shoes",
+    "price": 180.00
+  },
+  {
+    "id": "4",
+    "name": "Apple iPhone 16",
+    "description": "Latest iPhone with advanced AI capabilities and improved camera",
+    "category": "Smartphones",
+    "price": 999.99
+  },
+  {
+    "id": "5",
+    "name": "Samsung Galaxy S25",
+    "description": "Powerful Android smartphone with stunning display and AI features",
+    "category": "Smartphones",
+    "price": 899.99
+  },
+  {
+    "id": "6",
+    "name": "MacBook Pro",
+    "description": "Professional laptop with M3 chip for demanding creative workflows",
+    "category": "Laptops",
+    "price": 1999.99
+  },
+  {
+    "id": "7",
+    "name": "Gaming Mouse",
+    "description": "High-precision gaming mouse with customizable RGB lighting",
+    "category": "Gaming Accessories",
+    "price": 79.99
+  },
+  {
+    "id": "8",
+    "name": "Mechanical Keyboard",
+    "description": "Premium mechanical keyboard with Cherry MX switches for gaming",
+    "category": "Gaming Accessories",
+    "price": 149.99
+  }
+]
