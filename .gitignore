@@ -39,3 +39,26 @@ Thumbs.db
 
 # Docker volumes (if stored locally)
 qdrant_storage/
+
+# Node
+node_modules/
+
+# Environment
+.env
+
+# Model cache
+.cache/
+local_cache/
+
+# Xenova
+Xenova/
+*.onnx
+
+# Qdrant
+qdrant_storage/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
