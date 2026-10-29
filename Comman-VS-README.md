@@ -59,6 +59,69 @@ Your flow is:
 - S3 stores the original images.
 * So Jina AI is the service; jina-clip-v2 is the embedding model.
 
+#### What is Xenova?
+
+**Xenova** (the `@xenova/transformers` library) is a JavaScript library that loads and runs embedding models, such as `Xenova/all-MiniLM-L6-v2`, in your application. Xenova is the library, not the model or a hosted embedding service.
+
+This is different from the S3 + Jina AI setup above: that setup calls Jina AI's hosted `jina-clip-v2` model to create image and text embeddings, which Qdrant stores and searches. Xenova is used in the separate MongoDB + Cloudinary project to generate embeddings in the application, which MongoDB Atlas stores and searches.
+
+#### Xenova setup steps (MongoDB + Cloudinary project)
+
+1. Install Node.js, and set up MongoDB Atlas and Cloudinary accounts.
+2. Open the `MongoDB_Aggregation_Operators/image-vector-search` project folder and install its dependencies:
+
+   ```bash
+   npm install
+   ```
+
+   This project already lists `@xenova/transformers` as a dependency.
+3. Create a `.env` file with the variables the project reads:
+
+   ```env
+   MONGO_URI=your_mongodb_atlas_connection_string
+   DB_NAME=your_database_name
+   CLOUDINARY_CLOUD_NAME=your_cloud_name
+   CLOUDINARY_API_KEY=your_api_key
+   CLOUDINARY_API_SECRET=your_api_secret
+   PORT=5000
+   ```
+
+   Keep real credentials private; `PORT` is optional and defaults to `5000`.
+4. In MongoDB Atlas, create a Vector Search index on the `images` collection: set the vector path to `embedding`, dimensions to `512`, and similarity to `cosine`.
+5. Start the app:
+
+   ```bash
+   npm run dev
+   ```
+
+   The app loads `Xenova/clip-vit-base-patch32` at startup. On first run, the model files are downloaded and cached locally, so the machine needs internet access. No Jina AI API key is needed for Xenova.
+6. Upload images through the app. It stores the originals in Cloudinary, generates 512-dimensional embeddings with CLIP, and stores the image metadata and vectors in MongoDB. Text and image queries are also embedded with CLIP before vector search.
+
+#### How search works (simple flow)
+
+Think of an embedding as a list of numbers that represents what an image or sentence means. CLIP turns both pictures and text into this same kind of list, so MongoDB can compare them.
+
+**First, save each image:**
+
+1. You upload an image to the app.
+2. Cloudinary saves the image and gives the app its URL.
+3. Xenova runs the CLIP model on that image URL and creates a 512-number embedding.
+4. MongoDB saves the image URL and embedding together in the `images` collection.
+
+**Then, search with text (`POST /api/images/search/text` with `{ "text": "a dog on a beach" }`):**
+
+1. The app gives your words to CLIP and gets a 512-number text embedding.
+2. MongoDB Atlas compares that query embedding with the saved image embeddings using the `image_vector_index` Vector Search index and cosine similarity.
+3. MongoDB returns the closest image matches, their URLs, and similarity scores.
+
+**Or, search with an image (`POST /api/images/search/image`):**
+
+1. The app uploads the query image to Cloudinary and gets its URL.
+2. CLIP turns the query image into a 512-number embedding.
+3. MongoDB compares it with the saved image embeddings and returns the closest matches.
+
+In short: **CLIP/Xenova makes the number lists; MongoDB Atlas compares them; Cloudinary keeps the image files.** The text and image searches work because CLIP represents both in a shared vector space.
+
 ###### Learned these related concepts:
 
 * Embedding model (jina-clip-v2): turns an image or text into a vector (a list of numbers).
